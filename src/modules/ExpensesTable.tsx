@@ -1,12 +1,21 @@
 import { useState } from "react";
 
-function ExpensesTable() {
+interface Props {
+  filteredValue: string;
+}
+
+function ExpensesTable({ filteredValue }: Props) {
   const [expenses, setExpenses] = useState([
     { description: "milk", amount: 5, category: "Groceries" },
     { description: "Eggs", amount: 10, category: "Groceries" },
     { description: "Electracity", amount: 100, category: "Utitities" },
     { description: "Movies", amount: 40, category: "Entertaitment" },
   ]);
+
+  const filteredExpenses =
+    filteredValue !== ""
+      ? expenses.filter((ele) => ele.category === filteredValue)
+      : expenses;
 
   return (
     <>
@@ -21,7 +30,7 @@ function ExpensesTable() {
             </tr>
           </thead>
           <tbody>
-            {expenses.map((ele, index) => (
+            {filteredExpenses.map((ele, index) => (
               <tr key={index}>
                 <td>{ele.description}</td>
                 <td>{`$${ele.amount}.00`}</td>

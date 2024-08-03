@@ -1,14 +1,17 @@
-function ExpensesFilter() {
+import { ChangeEvent } from "react";
+
+interface Props {
+  onHandleClick: (event: ChangeEvent<HTMLSelectElement>) => void;
+}
+function ExpensesFilter({ onHandleClick }: Props) {
   return (
     <>
       <div className="mb-3">
-        <label htmlFor="category" className="form-label">
-          Category
-        </label>
         <select
-          id="category"
+          id="filter"
           className="form-select"
           aria-label="Default select example"
+          onChange={onHandleClick}
         >
           <option value=""> </option>
           <option value="Groceries">Groceries</option>
